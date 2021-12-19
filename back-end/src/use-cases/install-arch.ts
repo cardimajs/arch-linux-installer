@@ -22,7 +22,7 @@ const installArchUseCase = async (props: Props) => {
 
   // Install inside arch
   const commands2 = [
-    "pacman -S grub efibootmgr networkmanager dialog mtools dosfstools git reflector snapper xdg-utils xdg-user-dirs inetutils base-devel linux-headers dhcp dhcpcd os-prober",
+    "pacman -S grub efibootmgr networkmanager dialog mtools dosfstools git reflector snapper xdg-utils xdg-user-dirs inetutils base-devel linux-headers dhcp dhcpcd os-prober --noconfirm",
     "ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime",
     "locale-gen",
     "echo bim > /etc/hostname",
