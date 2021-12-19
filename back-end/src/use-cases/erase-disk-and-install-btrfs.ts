@@ -25,7 +25,7 @@ const eraseDiskAndInstallBtrfs = async (props: Props) => {
     `btrfs subvolume create ${folderPath}/@snapshots`,
     `btrfs subvolume create ${folderPath}/@var_log`,
     `umount ${folderPath}`,
-    `mount -o subvol=@ ${rootParticion} -L ROOT ${folderPath}`,
+    `mount -o subvol=@ ${rootParticion} ${folderPath}`,
     `mkdir -p ${folderPath}/{boot,home,.snapshots,var_log}`,
     `mount -o subvol=@home ${rootParticion} ${folderPath}/home`,
     `mount -o subvol=@snapshots ${rootParticion} ${folderPath}/.snapshots`,
