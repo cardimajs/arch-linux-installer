@@ -30,6 +30,13 @@ const installArchUseCase = async (props: Props) => {
     "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB",
     "grub-mkconfig -o /boot/grub/grub.cfg",
     "systemctl enable NetworkManager",
+    `sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers`,
+    `sed -i 's/^#Para/Para/' /etc/pacman.conf`,
+    `sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf`,
+    "pacman -Sy --noconfirm",
+    "echo 102030 | passwd root --stdin",
+    "useradd -mG wheel cardimajs",
+    "echo 102030 | passwd cardimajs --stdin",
   ];
 
   for (const command of commands2) {
