@@ -32,7 +32,7 @@ const installArchUseCase = async (props: Props) => {
     "systemctl enable NetworkManager",
     `sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers`,
     `sed -i 's/^#Para/Para/' /etc/pacman.conf`,
-    `sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf`,
+    // `sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf`,
     "pacman -Sy --noconfirm",
     "echo 102030 | passwd root --stdin",
     "useradd -mG wheel cardimajs",
