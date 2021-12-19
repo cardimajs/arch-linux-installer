@@ -34,15 +34,23 @@ const installArchUseCase = async (props: Props) => {
     `sed -i 's/^#Para/Para/' /etc/pacman.conf`,
     // `sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf`,
     "pacman -Sy --noconfirm",
-    "echo 'root:102030' | sudo chpasswd",
     "useradd -mG wheel cardimajs",
-    "echo 'cardimas:102030' | sudo chpasswd",
   ];
 
   for (const command of commands2) {
     const chRootCommand = `arch-chroot ${folderToInstall} ${command}`;
     console.log(command);
     await execPromise(chRootCommand);
+  }
+
+  const commands3 = [
+    `echo 'root:102030' | arch-chroot ${folderToInstall} chpasswd`,
+    `echo 'cardimajs:102030' | arch-chroot ${folderToInstall} chpasswd`,
+  ];
+
+  for (const command of commands3) {
+    console.log(command);
+    await execPromise(command);
   }
 
   return {
