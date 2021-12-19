@@ -34,9 +34,9 @@ const installArchUseCase = async (props: Props) => {
     `sed -i 's/^#Para/Para/' /etc/pacman.conf`,
     // `sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf`,
     "pacman -Sy --noconfirm",
-    "echo 102030 | passwd root --stdin",
+    "echo 'root:102030' | sudo chpasswd",
     "useradd -mG wheel cardimajs",
-    "echo 102030 | passwd cardimajs --stdin",
+    "echo 'cardimas:102030' | sudo chpasswd",
   ];
 
   for (const command of commands2) {
