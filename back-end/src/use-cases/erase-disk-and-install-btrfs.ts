@@ -20,7 +20,6 @@ const eraseDiskAndInstallBtrfs = async (props: Props) => {
     `mkfs.vfat -F32 -n "EFIBOOT" ${bootParticion}`,
     `mkfs.btrfs -L "ROOT" ${rootParticion} -f`,
     `mount -t btrfs ${rootParticion} ${folderPath}`,
-    `ls ${folderPath} | xargs btrfs subvolume delete`,
     `btrfs subvolume create ${folderPath}/@`,
     `btrfs subvolume create ${folderPath}/@home`,
     `btrfs subvolume create ${folderPath}/@snapshots`,
