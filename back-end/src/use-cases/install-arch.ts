@@ -1,11 +1,13 @@
 import { execPromise } from "../utils/index";
 
 interface Props {
-  folderToInstall: string;
+  folderToInstall?: string;
 }
 
 const installArchUseCase = async (props: Props) => {
   const { folderToInstall = "/mnt" } = props;
+
+  console.log(`FOLDER => `, folderToInstall);
 
   const commands = [
     `pacstrap ${folderToInstall} base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget libnewt --noconfirm --needed`,

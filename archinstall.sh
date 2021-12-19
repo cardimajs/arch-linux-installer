@@ -1,4 +1,4 @@
-sudo pacman -S nodejs npm
+sudo pacman -S nodejs npm --noconfirm
 cd front-end
 npm install
 npm run build

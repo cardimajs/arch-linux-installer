@@ -5,6 +5,7 @@ import path from "path";
 import { preInstallUseCase } from "./use-cases/pre-install";
 import { getHddInfoUseCase } from "./use-cases/get-hdd-indo";
 import { eraseDiskAndInstallBtrfs } from "./use-cases/erase-disk-and-install-btrfs";
+import { installArchUseCase } from "./use-cases/install-arch";
 
 const server = fastify();
 
@@ -34,6 +35,16 @@ server.get<{ Params: { disk: string } }>(
       folderPath: "/mnt",
       isNvme: false,
     });
+    return {
+      status: "done",
+    };
+  }
+);
+
+server.get<{ Params: { path: string } }>(
+  "/install-arch/:folder",
+  async (request, reply) => {
+    await installArchUseCase({});
     return {
       status: "done",
     };
