@@ -4,6 +4,7 @@ import path from "path";
 
 import { preInstallUseCase } from "./use-cases/pre-install";
 import { getHddInfoUseCase } from "./use-cases/get-hdd-indo";
+import { eraseDiskAndInstallBtrfs } from "./use-cases/erase-disk-and-install-btrfs";
 
 const server = fastify();
 
@@ -22,6 +23,22 @@ server.get("/pre-install", async (request, reply) => {
     status: "done",
   };
 });
+
+server.get<{ Params: { disk: string } }>(
+  "/erase-disk-and-btrfs/:disk",
+  async (request, reply) => {
+    const disk = `/dev/${request.params.disk}`;
+
+    await eraseDiskAndInstallBtrfs({
+      disk,
+      folderPath: "/mnt",
+      isNvme: false,
+    });
+    return {
+      status: "done",
+    };
+  }
+);
 
 const start = async () => {
   try {
