@@ -1,9 +1,9 @@
 sudo pacman -S nodejs npm
 cd front-end
 npm install
-npm build
+npm run build
 cd ..
 cd back-end
 npm install
-npm build
+npm run build
 sudo node ./dist/index.js
