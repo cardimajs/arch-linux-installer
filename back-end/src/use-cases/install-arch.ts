@@ -34,8 +34,8 @@ const installArchUseCase = async (props: Props) => {
 
   for (const command of commands2) {
     const chRootCommand = `arch-chroot ${folderToInstall} ${command}`;
-    await execPromise(chRootCommand);
     console.log(command);
+    await execPromise(chRootCommand);
   }
 
   return {

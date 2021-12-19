@@ -53,7 +53,7 @@ server.get<{ Params: { path: string } }>(
 
 const start = async () => {
   try {
-    await server.listen(3000);
+    await server.listen(3000, "::");
     console.log("Server running on port 3000");
   } catch (err) {
     process.exit(1);

@@ -1,3 +1,4 @@
+sudo mount -o remount,size=1G /run/archiso/cowspace
 sudo pacman -S nodejs npm --noconfirm
 cd front-end
 npm install
