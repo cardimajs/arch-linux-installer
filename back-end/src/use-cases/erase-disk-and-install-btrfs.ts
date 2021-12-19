@@ -14,8 +14,8 @@ const eraseDiskAndInstallBtrfs = async (props: Props) => {
   const commands = [
     `sgdisk -Z ${disk}`,
     `sgdisk -a 2048 -o ${disk}`,
-    `sgdisk -n 1::+500M --typecode=2:ef00 --change-name=2:'EFIBOOT' ${disk}`,
-    `sgdisk -n 2::-0 --typecode=3:8300 --change-name=3:'ROOT' ${disk}`,
+    `sgdisk -n 1::+500M --typecode=1:ef00 --change-name=1:'EFIBOOT' ${disk}`,
+    `sgdisk -n 2::-0 --typecode=2:8300 --change-name=2:'ROOT' ${disk}`,
     `sgdisk -A 1:set:2 ${disk}`,
     `mkfs.vfat -F32 -n "EFIBOOT" ${bootParticion}`,
     `mkfs.btrfs -L "ROOT" ${rootParticion} -f`,
