@@ -14,7 +14,7 @@ server.register(fastifyStatic, {
   root: path.join(__dirname, "front"),
 });
 
-server.get("requirements", async (request, reply) => {
+server.get("/requirements", async (request, reply) => {
   const data = await checkRequirementsUseCase();
   return data;
 });
@@ -62,6 +62,7 @@ const start = async () => {
     await server.listen(5000, "::");
     console.log("Server running on port 5000");
   } catch (err) {
+    console.log(err);
     process.exit(1);
   }
 };
