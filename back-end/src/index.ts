@@ -5,12 +5,18 @@ import path from "path";
 import { preInstallUseCase } from "./use-cases/pre-install";
 import { getHddInfoUseCase } from "./use-cases/get-hdd-indo";
 import { eraseDiskAndInstallBtrfs } from "./use-cases/erase-disk-and-install-btrfs";
-import { installArchUseCase } from "./use-cases/install-arch";
+// import { installArchUseCase } from "./use-cases/install-arch";
+import { checkRequirementsUseCase } from "./use-cases/check-requirements";
 
 const server = fastify();
 
 server.register(fastifyStatic, {
   root: path.join(__dirname, "front"),
+});
+
+server.get("requirements", async (request, reply) => {
+  const data = await checkRequirementsUseCase();
+  return data;
 });
 
 server.get("/hdd-info", async (request, reply) => {
@@ -41,15 +47,15 @@ server.get<{ Params: { disk: string } }>(
   }
 );
 
-server.get<{ Params: { path: string } }>(
-  "/install-arch/:folder",
-  async (request, reply) => {
-    await installArchUseCase({});
-    return {
-      status: "done",
-    };
-  }
-);
+// server.get<{ Params: { path: string } }>(
+//   "/install-arch/:folder",
+//   async (request, reply) => {
+//     await installArchUseCase({});
+//     return {
+//       status: "done",
+//     };
+//   }
+// );
 
 const start = async () => {
   try {

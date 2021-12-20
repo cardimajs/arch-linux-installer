@@ -16,18 +16,48 @@ import {
   CircularProgress,
 } from '@mui/material';
 
+
+interface Requirement {
+  name: string,
+  status: boolean,
+}
+
+const requirementsData: Requirement[] = [
+  {
+    name: 'Internet',
+    status: false
+  },
+  {
+    name: 'Disk Space',
+    status: false
+  },
+  {
+    name: 'Root',
+    status: false
+  },
+  {
+    name: 'EFI',
+    status: false
+  }
+]
+
 const Welcome = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
-  const [internet, setInternet] = useState(false);
-  const [diskSpace, setDiskSpace] = useState(false);
+
+  const [requirements, setRequirements] = useState<Requirement[]>(requirementsData)
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-      setInternet(true);
-      setDiskSpace(true);
+      // setRequirements()
     }, 4000);
   }, []);
+
+
+  const checkRequirements = (): boolean => {
+    const check = requirements.filter( requirement => requirement.status === true)
+    return (check.length === requirements.length) ? false : true
+  }
 
   return (
     <Stack
@@ -47,31 +77,16 @@ const Welcome = (): JSX.Element => {
         </Typography>
 
         <List>
-        <ListItem>
-            <ListItemText primary="Root user" />
-            <ListItemIcon>
-              {loading ? (
-                <CircularProgress />
-              ) : (
-                <>
-                  {internet ? (
-                    <MdCheck color="green" size={30} />
-                  ) : (
-                    <MdClose color="red" size={30} />
-                  )}
-                </>
-              )}
-            </ListItemIcon>
-          </ListItem>
 
-          <ListItem>
-            <ListItemText primary="Internet" />
+        {requirements.map( requirement => (
+          <ListItem key={requirement.name}>
+            <ListItemText primary={requirement.name} />
             <ListItemIcon>
               {loading ? (
                 <CircularProgress />
               ) : (
                 <>
-                  {internet ? (
+                  {requirement.status ? (
                     <MdCheck color="green" size={30} />
                   ) : (
                     <MdClose color="red" size={30} />
@@ -80,22 +95,8 @@ const Welcome = (): JSX.Element => {
               )}
             </ListItemIcon>
           </ListItem>
-          <ListItem>
-            <ListItemText primary="Disk Space" />
-            <ListItemIcon>
-              {loading ? (
-                <CircularProgress />
-              ) : (
-                <>
-                  {diskSpace ? (
-                    <MdCheck color="green" size={30} />
-                  ) : (
-                    <MdClose color="red" size={30} />
-                  )}
-                </>
-              )}
-            </ListItemIcon>
-          </ListItem>
+        ))}
+
         </List>
       </div>
 
@@ -104,7 +105,7 @@ const Welcome = (): JSX.Element => {
         endIcon={<MdArrowForward />}
         component={Link}
         to="/particions"
-        disabled={loading ? true : !internet && !diskSpace}
+        disabled={loading || checkRequirements()}
       >
         Next
       </Button>

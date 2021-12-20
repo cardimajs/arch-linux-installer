@@ -15,7 +15,7 @@ Features
 - [ ] Bios
 - [x] UEFI
 - [x] BTRFS
-- [ ] Keep Home folder
+- [ ] Keep Home folder, clean kde/gnome config
 - [ ] pacman.conf multilib
 - [ ] Pipewire
 - [ ] Kde option
@@ -38,4 +38,8 @@ Features
 - [ ] sudoers
 - [ ] optional software Libreoffice, vlc, gimp, inlscape celluloid
 - [ ] Btrfs snapshots
-- [ ]
+- [ ] chaotic aur
+- [ ] virtualbox tools
+- [ ] ssh
+- [ ] mosh
+- [ ] Fix problem upload file special character on chrome
