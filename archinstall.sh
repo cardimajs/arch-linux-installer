@@ -1,5 +1,5 @@
 sed -i 's/^#Para/Para/' /etc/pacman.conf
-sudo mount -o remount,size=1G /run/archiso/cowspace
+sudo mount -o remount,size=2G /run/archiso/cowspace
 sudo pacman -S nodejs npm electron xorg xorg-xinit --noconfirm
 cd front-end
 npm install
