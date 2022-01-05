@@ -39,7 +39,7 @@ server.get<{ Params: { disk: string } }>(
     await eraseDiskAndInstallBtrfs({
       disk,
       folderPath: "/mnt",
-      isNvme: false,
+      isNvme: true,
     });
     return {
       status: "done",
